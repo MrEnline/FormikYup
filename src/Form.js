@@ -22,6 +22,9 @@ const Form = () => {
         onSubmit: (values) => console.log(JSON.stringify(values, null, 2)),
     });
 
+    //value={formik.values.email} onChange={formik.handleChange} onBlur={formik.handleBlur}
+    //аналогично {...formik.getFieldProps('email')}
+
     return (
         <form className="form" onSubmit={formik.handleSubmit}>
             <h2>Отправить пожертвование</h2>
@@ -36,14 +39,7 @@ const Form = () => {
             />
             {formik.errors.name && formik.touched.name ? <div className="error">{formik.errors.name}</div> : null}
             <label htmlFor="email">Ваша почта</label>
-            <input
-                id="email"
-                name="email"
-                type="email"
-                value={formik.values.email}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-            />
+            <input id="email" name="email" type="email" {...formik.getFieldProps("email")} />
             {formik.errors.email && formik.touched.email ? <div className="error">{formik.errors.email}</div> : null}
             <label htmlFor="amount">Количество</label>
             <input
